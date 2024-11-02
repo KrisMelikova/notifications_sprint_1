@@ -1,0 +1,59 @@
+@startuml Notification System Architecture
+
+package "Notification System" {
+    [Notification API] as notification_api
+    
+    package "Scheduler Service" {
+        [Airflow] as scheduler
+    }
+    
+    queue "RabbitMQ" as rabbitmq {
+        queue "Raw Events" as raw
+        queue "Enriched Events" as enriched
+        queue "Dead Letter" as dlq
+    }
+    
+    package "Workers" {
+        [Enrichment Worker] as enricher
+        [Sender Worker] as sender
+    }
+
+    database "MongoDB" {
+        database "EventTable" as etable
+        database "NotificationTable" as ntable
+    }
+}
+
+package "External Services" <<Existing services>> {
+    [Auth Service] as auth
+    [Cinema API] as cinema
+    [UGC Service] as ugc
+}
+
+' Notification API & Queue connections
+notification_api --> raw: publishes events
+notification_api --> etable: CRUD
+notification_api --> ntable: CRUD
+
+' External connections
+cinema --> notification_api: sends events
+auth --> notification_api: sends events
+ugc --> notification_api: sends events
+
+' Enrichment Worker connections
+enricher --> auth: get user data
+enricher --> raw: consumes
+enricher --> enriched: publishes
+
+' Sender Worker connections
+sender --> enriched: consumes
+sender --> ntable: sending result
+
+' Queue connections
+enriched --> dlq: routes
+raw --> dlq: routes
+
+' Scheduler connections
+scheduler --> notification_api: generates events
+
+@enduml

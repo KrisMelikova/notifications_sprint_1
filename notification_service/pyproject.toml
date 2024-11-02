@@ -1,0 +1,51 @@
+[tool.poetry]
+name = "Notifications service"
+version = "1.0.0"
+description = "Notifications service for online cinema"
+authors = ["Awesome team"]
+readme = "README.md"
+package-mode = false
+
+[tool.poetry.dependencies]
+aiohttp = "^3.7.2"
+aio-pika = "^9.4.3"
+aiormq = "^6.8.0"
+asyncpg = "^0.29.0"
+backoff = "^2.2.1"
+faker = "^26.2.0"
+fastapi = { extras = ["standard"], version = "^0.112.0" }
+flake8 = "^7.1.0"
+flake8-html = "^0.4.3"
+motor = "^3.5.1"
+orjson = "^3.10.6"
+pydantic = "^2.8.2"
+pydantic-settings = "^2.4.0"
+pyjwt = "^2.8.0"
+python = "^3.10"
+pytest = "^6.1.2"
+pytest-asyncio = "^0.12.0"
+requests = "^2.32.3"
+tzdata = "^2024.1"
+uvicorn = "^0.30.5"
+wemake-python-styleguide = "^0.19.2"
+
+[tool.poetry.group.prod]
+optional = true
+
+[tool.poetry.group.prod.dependencies]
+gunicorn = "^22.0.0"
+
+[tool.pytest.ini_options]
+addopts = "-rsxX -l --tb=short --strict"
+testpaths = ["tests", "funcional"]
+filterwarnings = "ignore::DeprecationWarning"
+
+[build-system]
+requires = ["poetry-core"]
+build-backend = "poetry.core.masonry.api"
+
+[tool.ruff]
+src = ["notification_service/src", "src", "../sender_worker/src"]
+
+[tool.ruff.lint]
+select = ["E", "F", "I"]

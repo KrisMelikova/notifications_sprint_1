@@ -33,7 +33,6 @@ app = FastAPI(
     },
 )
 
-app.include_router(healthcheck.router, prefix="/api/v1/healthcheck")
 app.include_router(notification.router, prefix="/api/v1/notification")
 
 if __name__ == "__main__":

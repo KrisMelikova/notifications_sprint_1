@@ -21,11 +21,6 @@ class NotificationEmailData(BaseModel):
     subject: str
 
 
-class NotificationWebsockerData(BaseModel):
-    email: str
-    subject: str
-
-
 class NotificationQueue(BaseModel):
     message: str
     channel: ChannelEnum

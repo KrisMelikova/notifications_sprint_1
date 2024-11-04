@@ -14,11 +14,6 @@ class Event(BaseModel):
     send_date: datetime | None = None
 
 
-class NewUserEventData(BaseModel):
-    user_id: UUID
-    url: str
-
-
 class NewEpisodeEventData(BaseModel):
     filmwork_id: UUID
     episode_id: UUID

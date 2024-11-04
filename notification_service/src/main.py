@@ -4,7 +4,7 @@ import uvicorn
 from fastapi import FastAPI
 from fastapi.responses import ORJSONResponse
 
-from src.api.v1 import healthcheck, notification
+from src.api.v1 import notification
 from src.core.config import settings
 from src.db import rabbitmq
 

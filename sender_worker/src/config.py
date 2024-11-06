@@ -23,7 +23,9 @@ class EmailSettings(BaseModel):
 
 
 class Settings(BaseSettings):
-    """Главный класс настроек event воркера"""
+    """
+    Service settings
+    """
 
     mongo: MongoDBSettings = MongoDBSettings()
     email: EmailSettings = EmailSettings()

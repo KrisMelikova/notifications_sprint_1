@@ -17,7 +17,7 @@ logger = getLogger()
 
 
 async def process_events(message: aio_pika.abc.AbstractIncomingMessage) -> None:
-    """Передача сообщения с событием в обработчик"""
+    """Passing an event message to a handler"""
     async with message.process():
         mongo_db = mongo.get_mongo_db(settings.mongo.db_name)
         logger.debug(" [x] Received message %r" % message)

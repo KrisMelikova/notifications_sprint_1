@@ -1,0 +1,30 @@
+services:
+  app:
+    ports:
+      - "8000:8000"
+
+  mock_api:
+    ports:
+      - "8001:8000"
+
+  rabbitmq:
+    ports:
+      - "15672:15672"
+      - "5672:5672"
+
+  mongodb:
+    ports:
+      - "27017:27017"
+
+  mailhog:
+    ports:
+      - "1025:1025"
+      - "8025:8025"
+
+  airflow-webserver:
+    ports:
+      - "8080:8080"
+
+  nginx:
+    ports:
+      - "80:80"

@@ -10,7 +10,7 @@ from src.db import rabbitmq
 
 
 @asynccontextmanager
-async def lifespan(app: FastAPI):
+async def lifespan(_: FastAPI):
     rabbitmq.connection = await rabbitmq.create_connection_rabbitmq()
     rabbitmq.channel = await rabbitmq.create_channel_rabbitmq(rabbitmq.connection)
 
